@@ -15,18 +15,18 @@
 #### Ensuring you can SSH from the Control Node to all the Managed nodes
 
 ## Installing Python
-sudo apt update 
-sudo apt install python3 -y
+### sudo apt update 
+### sudo apt install python3 -y
 
 
 ## Installing Ansible 
 
-sudo apt update 
-sudo apt install ansible -y
+### sudo apt update 
+### sudo apt install ansible -y
 
 ## Setting SSH Connection
-From control node : 
-ssh-keygen
-ssh-copy-id     ManagedNodeUser@ManagedNodeIP
+### From control node : 
+#### ssh-keygen
+#### ssh-copy-id     ManagedNodeUser@ManagedNodeIP
 
 
