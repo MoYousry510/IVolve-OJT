@@ -6,9 +6,9 @@
 
 ## In order to use this play books you need the following 
 
-1- [Python on All Nodes(Managed and Control)](#Installing Python) 
-2- [Installing Ansible on Control Node](#Installing Ansible)
-3- [Ensuring you can SSH from the Control Node to all the Managed nodes](#Setting SSH Connection)
+1- Python on All Nodes(Managed and Control)
+2- Installing Ansible on Control Node
+3- Ensuring you can SSH from the Control Node to all the Managed nodes
 
 ## Installing Python
 sudo apt update 
