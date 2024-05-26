@@ -1,0 +1,18 @@
+---
+- name: Install and start Nginx on RedHat-based systems
+  hosts: mahara
+  become: true
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx service
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
