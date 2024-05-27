@@ -8,10 +8,10 @@
 ![image](https://github.com/MoYousry510/IVolve-OJT/assets/80543993/21ca624c-668c-486e-a8ef-ef47589f10d1)
 ## Make Sure Networking Diagram is Correct 
 ![image](https://github.com/MoYousry510/IVolve-OJT/assets/80543993/e123d39c-67b6-4b1b-afe5-fdd18cd255bb)
-
+## Create a Security Group to Allow Inboung SSH Traffic 
+![image](https://github.com/MoYousry510/IVolve-OJT/assets/80543993/be1b32eb-89b4-4bff-8fd5-6029d8636442)
 ## Step 2: Launch a Bastion Host in the Public Subnet
 ![image](https://github.com/MoYousry510/IVolve-OJT/assets/80543993/16fb98e2-83ac-43f5-9ddc-5d18225611dd)
-
 ## Step 3: Launch an EC2 Instance in the Private Subnet
 ![image](https://github.com/MoYousry510/IVolve-OJT/assets/80543993/bd58a531-5414-4edc-882c-89bd029656eb)
 
