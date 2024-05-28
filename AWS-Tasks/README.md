@@ -7,3 +7,5 @@
 ### Lab20:
   Create VPC, private subnets, launch EC2, configure security groups, and connect to the EC2 instance using bastion host.
 
+### Lab21:
+  Create a loadbalancer to direct traffic between two EC2 web servers one is apache and the other is nginx.
