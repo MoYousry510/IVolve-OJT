@@ -1,4 +1,4 @@
-## The Purrpose of this Lab is to create an s3 bucket and enable Versioning and Logging Through AWS-CLI 
+## The Purpose of this Lab is to create an s3 bucket and enable Versioning and Logging Through AWS-CLI 
 
 ### Step1: Make Sure you have Aws installed and configured 
 
