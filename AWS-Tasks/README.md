@@ -9,3 +9,5 @@
 
 ### Lab21:
   Create a loadbalancer to direct traffic between two EC2 web servers one is apache and the other is nginx.
+### Lab22:
+  The Purrpose of this Lab is to create an s3 bucket and enable Versioning and Logging Through AWS-CLI
