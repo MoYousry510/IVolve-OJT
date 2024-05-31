@@ -1,7 +1,7 @@
 ---
 - name: Installing Devops tools
   hosts: all
-  remote_user: ec2-user 
+  remote_user: ubuntu 
   roles:
     #- role: '/home/yousry/roles/Docker_role'
     - role: '/home/yousry/roles/jenkins_role'
