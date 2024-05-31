@@ -1,0 +1,34 @@
+---
+- name: Install and start Nginx on RedHat-based systems
+  hosts: mahara
+  become: true
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx service
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+        
+
+    - name: Backup the original Nginx index.html
+      command: mv /usr/share/nginx/html/index.html /usr/share/nginx/html/index.html.bak
+      args:
+        removes: /usr/share/nginx/html/index.html.bak
+
+    - name: Copy custom index.html to Nginx web root
+      copy:
+        src: ./index.html
+        dest: /usr/share/nginx/html/index.html
+        mode: '0644'
+
+    - name: Restart Nginx to apply changes
+      systemd:
+        name: nginx
+        state: restarted
