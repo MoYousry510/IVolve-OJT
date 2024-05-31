@@ -1,13 +1,27 @@
 ---
 # tasks file for jenkins_role
 
+
+
+- name: Remove any existing Jenkins repository configuration
+  file:
+    path: /etc/apt/sources.list.d/jenkins.list
+    state: absent
+  ignore_errors: yes
+
+- name: Clean the local repository and package cache
+  command: apt-get clean
+ 
+
+
 - name: Install Java
   apt:
     name: openjdk-11-jdk
     state: present
-    update_cache: yes
+
 
     # Install Jenkins
+ 
 - name: Add Jenkins repository key
   apt_key:
     url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
@@ -15,13 +29,9 @@
 
 - name: Add Jenkins repository
   apt_repository:
-    repo: http://pkg.jenkins.io/debian-stable binary/
+    repo: deb http://pkg.jenkins.io/debian-stable binary/
     state: present
 
-- name: Update apt cache for Jenkins
-  apt:
-    update_cache: yes
-    
 - name: Install Jenkins
   apt:
     name: jenkins

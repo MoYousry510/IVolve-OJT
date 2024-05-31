@@ -4,16 +4,18 @@
     # Install OpenShift CLI
 - name: Download OpenShift CLI
   get_url:
-    url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
+    url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz 
     dest: /tmp/openshift-client-linux.tar.gz
 
 - name: Extract OpenShift CLI
   unarchive:
+    remote_src: yes
     src: /tmp/openshift-client-linux.tar.gz
     dest: /usr/local/bin/
     creates: /usr/local/bin/oc
     mode: '0755'
 
+  
 - name: Verify OpenShift CLI installation
   command: oc version
   register: oc_version

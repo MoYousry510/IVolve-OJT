@@ -1,41 +1,61 @@
 ---
 
-- name: Install required packages for Docker
+
+
+
+- name: Install required packages
   apt:
     name:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
+          - ca-certificates
+          - curl
     state: present
-    
-- name: Add Docker's official GPG key
-  apt_key:
+
+- name: Create directory for apt keyrings
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Download Docker GPG key
+  get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+    dest: /etc/apt/keyrings/docker.asc
+    mode: '0644'
 
 - name: Add Docker repository
-  apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-    state: present
+  shell: |
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-- name: Update apt cache for Docker
-  apt:
-    update_cache: yes
+- name: Update apt package index after adding Docker repo
+  shell:
+     "apt update && apt upgrade"
 
 - name: Install Docker
   apt:
-    name: docker-ce
+    name:
+       - docker-ce
+       - docker-ce-cli
+       - containerd.io
+       - docker-buildx-plugin
+       - docker-compose-plugin
     state: present
 
-- name: Start and enable Docker service
-  systemd:
+- name: Ensure Docker service is started and enabled
+  service:
+     name: docker
+     state: started
+     enabled: yes
+
+- name: Ensure Docker service is running
+  service:
     name: docker
     state: started
     enabled: yes
 
-- name: Add current user to Docker group
+- name: Add the current user to the Docker group
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ lookup('env', 'USER') }}"
     groups: docker
     append: yes
+
+
