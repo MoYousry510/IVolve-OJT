@@ -3,8 +3,8 @@
   hosts: all
   remote_user: ubuntu 
   roles:
-    #- role: '/home/yousry/roles/Docker_role'
-    - role: '/home/yousry/roles/jenkins_role'
-    #- role: '/home/yousry/roles/OC-role'  
+     - role: '/home/yousry/Desktop/IVolve_OJT/Ansible_Tasks/Lab27/roles/jenkins_role'
+     - role: '/home/yousry/Desktop/IVolve_OJT/Ansible_Tasks/Lab27/roles/Docker_role'
+     - role: '/home/yousry/Desktop/IVolve_OJT/Ansible_Tasks/Lab27/roles/OC-role'  
   
 
