@@ -17,6 +17,6 @@
 
 ![image](https://github.com/MoYousry510/IVolve-OJT/assets/80543993/d1e46965-ec5f-4b7b-bcaa-a507ae221173)
 
-### As We can see the data has successfuly transfered to the DynamoDB.  
+### As We can see the data has successfuly transferred to the DynamoDB.  
 
 
