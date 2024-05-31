@@ -6,12 +6,6 @@
 ### First Task was to create an Nginx Webserver 
 ### Seconed Task was to install mysql , start and enable it, then create a user with high privileges.
 
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 ## In order to use this play books you need the following 
 
 #### Python on All Nodes(Managed and Control)
