@@ -1,0 +1,42 @@
+---
+- name: MySQL Installation and Configuration
+  hosts: mahara
+  become: true
+  vars_files:
+    - vault.yml  # Ansible Vault file containing sensitive data
+  tasks:
+    - name: Install MySQL
+      yum:
+        name: mysql-server
+        state: present
+        
+    - name: Install MySQL Python library
+      yum:
+        name: python3-PyMySQL
+        state: present
+
+
+    - name: Enable and Start MySQL Service
+      service:
+        name: mysqld
+        enabled: yes
+        state: started
+
+
+    - name: Create Database
+      mysql_db:
+        name: mydb
+        state: present
+
+    - name: Create MySQL User
+      mysql_user:
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_user_password }}"
+        state: present
+
+    - name: Grant Privileges to User on Database
+      mysql_user:
+        name: "{{ mysql_user }}"
+        priv: "mydb.*:ALL"
+        state: present
+

@@ -8,7 +8,10 @@
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 ## In order to use this play books you need the following 
 
 #### Python on All Nodes(Managed and Control)
