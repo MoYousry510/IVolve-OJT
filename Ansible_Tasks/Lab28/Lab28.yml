@@ -2,9 +2,17 @@
 - name: Installing Devops tools
   hosts: all
   remote_user: ubuntu 
-  roles:
-     - role: '/home/yousry/Desktop/IVolve_OJT/Ansible_Tasks/Lab27/roles/jenkins_role'
-     - role: '/home/yousry/Desktop/IVolve_OJT/Ansible_Tasks/Lab27/roles/Docker_role'
-     - role: '/home/yousry/Desktop/IVolve_OJT/Ansible_Tasks/Lab27/roles/OC-role'  
-  
+  become: true
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx service
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+        
 
