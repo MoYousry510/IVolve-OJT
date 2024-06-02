@@ -1,20 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: my-app-PresStorage
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: my-app
+      app: nginx
   template:
     metadata:
       labels:
-        app: my-app
+        app: nginx
     spec:
       containers:
       - name: nginx
-        image: httpd
+        image: nginx
         ports:
         - containerPort: 80
+        volumeMounts:
+         - name: "Nginx Contents"
+           mountPath: /usr/share/nginx/html
 
