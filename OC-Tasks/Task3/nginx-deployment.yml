@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-PresStorage
+  name: my-app-storage
 spec:
   replicas: 1
   selector:
@@ -18,6 +18,9 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-         - name: "Nginx Contents"
-           mountPath: /usr/share/nginx/html
-
+        - name: nginx-html
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: nginx-html
+        persistentVolumeClaim:
+          claimName: pvc
