@@ -5,5 +5,9 @@ metadata:
   namespace: nti
 spec:
   hard:
+    requests.cpu: "0.5"
+    requests.memory: 1Gi
+    limits.cpu: "4"
+    limits.memory: 4Gi
     pods: "10"
 
