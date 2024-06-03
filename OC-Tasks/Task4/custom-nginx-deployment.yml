@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: custom-nginx
+  template:
+    metadata:
+      labels:
+        app: custom-nginx
+    spec:
+      containers:
+      - name: custom-nginx
+        image: engyousry/custom_nginx
+        ports:
+        - containerPort: 80
+
