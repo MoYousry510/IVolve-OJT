@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: nti
+data:
+  database_name: db
+  database_user: yousry
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: nti
+type: Opaque
+data:
+  root_password: eW91c3J5eW91c3J5
+  user_password: eW91c3J5eW91c3J5
+
