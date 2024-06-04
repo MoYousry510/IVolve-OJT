@@ -16,7 +16,7 @@
      - Taints and Tolerations: Generally simpler, more straightforward for exclusion.
      - Node Affinity: More flexible and expressive for placement preferences and requirements.
 
-### First we create a DaemonSet and notice how many pods are created... we will notice only one pod whic indicates only one node exists in the cluster 
+### First we create a DaemonSet and notice how many pods are created... we will notice only one pod which indicates only one node exists in the cluster 
 ![image](https://github.com/MoYousry510/IVolve-OJT/assets/80543993/10b6db1d-6411-4384-aa33-572b155d2e40)
 
 ### We then taint this node red 
