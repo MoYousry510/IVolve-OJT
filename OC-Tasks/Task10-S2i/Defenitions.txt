@@ -1,0 +1,105 @@
+In OpenShift, BuildConfigs define how to build Docker-formatted container images from your application source code. They include various strategies that determine how the build process is executed. Here are the main build strategies available in OpenShift:
+
+1. Source Strategy
+The Source strategy builds images directly from application source code, using Source-to-Image (S2I) scripts if available. This strategy is suitable for applications where the build process can be automated and doesn't require a Dockerfile.
+
+Example:
+
+yaml
+Copy code
+strategy:
+  type: Source
+  sourceStrategy:
+    from:
+      kind: DockerImage
+      name: 'registry.access.redhat.com/rhscl/nginx-114-rhel7:latest'
+2. Docker Strategy
+The Docker strategy builds images from a Dockerfile in the source repository. It's suitable for applications where you need fine-grained control over the build process or when using tools and dependencies not supported by S2I.
+
+Example:
+
+yaml
+Copy code
+strategy:
+  type: Docker
+  dockerStrategy:
+    dockerfilePath: Dockerfile
+3. Custom Strategy
+The Custom strategy allows you to define custom build logic using scripts or plugins. This is useful when the build process is complex and cannot be handled by S2I or Dockerfile alone.
+
+Example:
+
+yaml
+Copy code
+strategy:
+  type: Custom
+  customStrategy:
+    from:
+      kind: DockerImage
+      name: 'registry.example.com/my-custom-builder:latest'
+4. Pipeline Strategy
+The Pipeline strategy allows you to define a Jenkins pipeline for building your application. This is useful for complex build processes requiring multiple stages or dependencies.
+
+Example:
+
+yaml
+Copy code
+strategy:
+  type: JenkinsPipeline
+  jenkinsPipelineStrategy:
+    jenkinsfilePath: Jenkinsfile
+5. BuildPack Strategy
+The BuildPack strategy uses a buildpack to detect and compile source code into a runnable container image. This is useful for polyglot applications where the buildpack can automatically detect and configure the build environment.
+
+Example:
+
+yaml
+Copy code
+strategy:
+  type: BuildPack
+  buildPackStrategy:
+    buildPack: nodejs
+Summary
+These are the main build strategies available in OpenShift BuildConfigs. The choice of strategy depends on your application's requirements, complexity, and your familiarity with the tools and technologies involved. Each strategy offers different levels of automation, customization, and control over the build process
+
+
+
+
+
+
+
+
+In OpenShift, an ImageStream is a Kubernetes resource that represents a logical collection of container images. It acts as a reference to one or more container images, enabling you to manage and deploy images within the OpenShift environment efficiently.
+
+Here are some key points about ImageStreams:
+
+Image Reference: An ImageStream references one or more container images. These images can be stored in the integrated Docker registry within OpenShift or in an external registry.
+
+Metadata: ImageStreams contain metadata about the images they reference, such as tags, labels, and annotations.
+
+Image Tagging: Images within an ImageStream are organized using tags. Each tag represents a specific version or configuration of an image. For example, you might have tags like latest, v1.0, develop, etc.
+
+Streamlining Image Management: ImageStreams simplify the management of container images within OpenShift. They provide a central place to store and reference images, making it easier to deploy and update applications.
+
+Image Triggers: ImageStreams can be used in conjunction with BuildConfigs to trigger automated builds whenever a new image is pushed to the ImageStream. This enables continuous integration and deployment workflows.
+
+Rolling Deployments: OpenShift uses ImageStreams to facilitate rolling deployments. When updating an application, OpenShift will automatically deploy new instances of the updated image while gracefully terminating old instances, ensuring minimal downtime.
+
+Access Control: ImageStreams support access control mechanisms, allowing you to restrict who can view, pull, or push images within the stream.
+
+Overall, ImageStreams play a crucial role in managing container images within OpenShift, providing a centralized and flexible mechanism for image storage, versioning, and deployment. They streamline the development and deployment process, enabling efficient continuous integration and delivery pipelines.
+
+
+
+
+
+
+
+oc apply -f buildconfig.yaml
+oc start-build my-html-app
+oc logs -f bc/my-html-app
+oc new-app my-html-app
+oc expose svc/my-html-app
+oc get route my-html-app
+
+

@@ -1,0 +1,48 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch-instance
+  namespace: mohamedyousry
+spec:
+  version: 7.15.0
+  nodeSets:
+  - name: default
+    count: 1
+    config:
+      node.master: true
+      node.data: true
+      node.ingest: true
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 0.5
+            limits:
+              memory: 2Gi
+              cpu: 1
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana-instance
+  namespace: mohamedyousry
+spec:
+  version: 7.15.0
+  count: 1
+  elasticsearchRef:
+    name: elasticsearch-instance
+---
+apiVersion: logstash.k8s.elastic.co/v1
+kind: Logstash
+metadata:
+  name: logstash-instance
+  namespace: mohamedyousry
+spec:
+  version: 7.15.0
+  count: 1
+  elasticsearchRef:
+    name: elasticsearch-instance
+

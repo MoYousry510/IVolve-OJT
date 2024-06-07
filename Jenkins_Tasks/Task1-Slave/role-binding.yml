@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: admin-rolebinding
+  namespace: mohamedyousry
+subjects:
+  - kind: ServiceAccount
+    name: token
+    namespace: mohamedyousry
+roleRef:
+  kind: Role
+  name: custom-admin-role  # Or use "admin" if binding to the predefined admin role
+  apiGroup: rbac.authorization.k8s.io
+
