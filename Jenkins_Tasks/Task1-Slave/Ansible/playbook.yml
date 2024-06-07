@@ -1,0 +1,82 @@
+---
+- name: Install Java 17, Docker, and OC CLI on Ubuntu
+  hosts: all
+  become: yes
+  remote_user: ubuntu
+  vars:
+    java_version: 17
+    docker_apt_key_url: https://download.docker.com/linux/ubuntu/gpg
+    docker_apt_repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    oc_cli_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz"
+    user_name: "{{ ansible_env.USER }}"
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        state: present
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: "{{ docker_apt_key_url }}"
+        state: present
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "{{ docker_apt_repo }}"
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: latest
+
+    - name: Add current user to Docker group
+      user:
+        name: "{{ user_name }}"
+        groups: docker
+        append: yes
+
+    - name: Install Java 17
+      apt:
+        name: openjdk-17-jdk
+        state: present
+
+    - name: Download OC CLI
+      get_url:
+        url: "{{ oc_cli_url }}"
+        dest: /tmp/openshift-client-linux.tar.gz
+
+    - name: Extract OC CLI
+      unarchive:
+        src: /tmp/openshift-client-linux.tar.gz
+        dest: /usr/local/bin
+        remote_src: yes
+
+    - name: Ensure OC CLI binaries are executable
+      file:
+        path: /usr/local/bin/{{ item }}
+        mode: '0755'
+      with_items:
+        - oc
+        - kubectl
+
+    - name: Clean up OC CLI tarball
+      file:
+        path: /tmp/openshift-client-linux.tar.gz
+        state: absent
+
+    - name: Restart Docker to apply group changes
+      service:
+        name: docker
+        state: restarted
+
